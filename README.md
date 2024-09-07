@@ -1,8 +1,5 @@
 # knn_fishmlserv
 
-
-
-
 # command
 ```bash
 물고기의 길이를 입력하세요: 33

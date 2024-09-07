@@ -2,6 +2,9 @@ from sklearn.neighbors import KNeighborsClassifier
 import matplotlib.pyplot as plt
 import numpy as np
 
+def ping():
+    print("pong")
+
 def is_exit(result_e):
     if result_e.lower() == 'exit':
         print("프로그램을 종료합니다.")
@@ -108,4 +111,4 @@ class FishClassifier:
         self.draw_graph()
 # 프로그램 실행
 fish_classifier = FishClassifier()
-fish_classifier.run()
+#fish_classifier.run()

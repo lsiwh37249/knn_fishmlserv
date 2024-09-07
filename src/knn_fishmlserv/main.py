@@ -1,5 +1,11 @@
 from sklearn.neighbors import KNeighborsClassifier
 
+def is_exit(result_e):
+    if result_e.lower() == 'exit':
+        print("프로그램을 종료합니다.")
+        return True  # 프로그램 종료를 위한 신호 반환
+    return False
+
 class FishClassifier:
     def __init__(self, neighbors=5):
         # 데이터 초기화
@@ -12,10 +18,21 @@ class FishClassifier:
 
     def add_initial_data(self):
         # 초기 데이터 입력받기
-        length = float(input("물고기의 길이를 입력하세요: "))
-        weight = float(input("물고기의 무게를 입력하세요: "))
+        length_input = input("물고기의 길이를 입력하세요: ")
+        if is_exit(length_input):
+            return False
+        weight_input = input("물고기의 무게를 입력하세요: ")
+        if is_exit(length_input):
+            return False
 
-        # 초기 정답 설정
+        # 입력값이 유효한지 확인
+        try:
+            length = float(length_input)
+            weight = float(weight_input)
+        except ValueError:
+            print("잘못된 입력입니다. 숫자를 입력하세요. :")
+            return False  # 종료
+
         if length + weight > 30:
             answer = '도미'
         else:
@@ -32,10 +49,21 @@ class FishClassifier:
 
         # 모델 학습
         self.kn.fit(self.fish_data, self.fish_target)
+        return True  # 계속 실행
 
     def fit_and_predict(self):
-        length = float(input("물고기의 길이를 입력하세요: "))
-        weight = float(input("물고기의 무게를 입력하세요: "))
+        length_input = input("물고기의 길이를 입력하세요: ")
+        if is_exit(length_input):
+            return False
+        weight_input = input("물고기의 무게를 입력하세요: ")
+        if is_exit(weight_input):
+            return False
+        try:
+            length = float(length_input)
+            weight = float(weight_input)
+        except ValueError:
+            print("잘못된 입력입니다. 숫자를 입력하세요. :")
+            return False  # 종료
         
         # 입력받은 데이터를 예측
         predict = self.kn.predict([[length, weight]])[0]
@@ -51,15 +79,16 @@ class FishClassifier:
 
         # 모델 다시 학습
         self.kn.fit(self.fish_data, self.fish_target)
+        
+        return True
 
     def run(self):
         self.add_initial_data()
         # 반복적으로 입력받기
+        # 반복적으로 입력받기
         while True:
-            self.fit_and_predict()
-            finish = input("나가기를 원하면 'exit'를 입력하세요: ")
-            if finish.lower() == "exit":
-                break
+            if not self.fit_and_predict():
+                break  # 종료 신호가 오면 종료
 
 # 프로그램 실행
 fish_classifier = FishClassifier()

@@ -1,4 +1,6 @@
 from sklearn.neighbors import KNeighborsClassifier
+import matplotlib.pyplot as plt
+import numpy as np
 
 def is_exit(result_e):
     if result_e.lower() == 'exit':
@@ -81,6 +83,20 @@ class FishClassifier:
         self.kn.fit(self.fish_data, self.fish_target)
         
         return True
+    def draw_graph(self):
+        # Convert fish_data to numpy array for easier manipulation
+        fish_data_np = np.array(fish_classifier.fish_data)
+
+        # Use kneighbors method to find neighbors
+        distances, indexes = fish_classifier.kn.kneighbors([[25, 150]])
+
+        # Plotting
+        plt.scatter(fish_data_np[:, 0], fish_data_np[:, 1])  # All fish data points
+        plt.scatter(25, 150, marker='^')  # New data point
+        plt.scatter(fish_data_np[indexes, 0], fish_data_np[indexes, 1], marker='D')  # Nearest neighbors
+        plt.xlabel('length')
+        plt.ylabel('weight')
+        plt.show()
 
     def run(self):
         self.add_initial_data()
@@ -89,7 +105,7 @@ class FishClassifier:
         while True:
             if not self.fit_and_predict():
                 break  # 종료 신호가 오면 종료
-
+        self.draw_graph()
 # 프로그램 실행
 fish_classifier = FishClassifier()
 fish_classifier.run()

@@ -1,5 +1,8 @@
 # knn_fishmlserv
 
+# Introduction
+This app classifies fishes('도미' and '빙어')
+
 # command
 ```bash
 $ knn_fishml

@@ -3,6 +3,14 @@
 # Introduction
 This app classifies fishes('도미' and '빙어')
 
+# knn_fishmlserv
+![스크린샷 2024-09-08 104652](https://github.com/user-attachments/assets/7cb791b1-3ad2-4a1d-b635-6339bfd67214)
+
+# usage
+```bash
+pip install knn_fishmlserv
+```
+
 # command
 ```bash
 $ knn_fishml

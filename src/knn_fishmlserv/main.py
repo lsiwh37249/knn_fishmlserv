@@ -1,9 +1,21 @@
 from sklearn.neighbors import KNeighborsClassifier
 import matplotlib.pyplot as plt
 import numpy as np
+import plotext as plot
+
+
+def getplot():
+    x =[1,2,3,4,5]
+    y=[1,2,3,4,5]
+
+    plot.scatter(x,y)
+    plot.title("Scatter")
+
+    plot.show()
 
 def ping():
     print("pong")
+    getplot()
 
 def is_exit(result_e):
     if result_e.lower() == 'exit':
@@ -20,6 +32,8 @@ class FishClassifier:
         
         # KNN 모델 초기화
         self.kn = KNeighborsClassifier(n_neighbors=self.neighbors)
+
+        print("나가기를 원하면 exit을 입력하세요")
 
     def add_initial_data(self):
         # 초기 데이터 입력받기
